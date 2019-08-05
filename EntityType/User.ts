@@ -6,7 +6,7 @@ import {Compose} from '../Helpers/Compose.ts'
 export class User extends Compose (Entity, ImprovedFieldable) {
 
     @FieldWidget({
-        label: 'Voornaam'
+        label: 'Voornaam',
     })
     protected firstName: string;
 

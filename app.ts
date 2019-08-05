@@ -25,3 +25,13 @@ console.log(
     green('A method from Entity: ::type:'),
     bold(user.type)
 );
+
+console.log(
+    green('instanceof replacement: ::isComposedWith:'),
+    bold(JSON.stringify(user.isComposedWith('Entity')))
+);
+
+console.log(
+    green('Name of the composed class:'),
+    bold(user.__proto__.constructor.__proto__.name)
+);
