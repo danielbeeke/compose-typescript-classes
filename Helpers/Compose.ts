@@ -13,22 +13,18 @@ export function Compose(...classes: any): any {
 
     NewClass.prototype.prototypes = {};
 
-    let copyProperties = (prototype) => {
+    const copyProperties = (prototype) => {
         while (prototype) {
-            Object.getOwnPropertyNames(prototype).forEach(methodName => {
-                if (!NewClass.prototype[methodName] && methodName != 'constructor') {
-                    NewClass.prototype[methodName] = prototype[methodName];
-                }
-            });
-
+            const { constructor, ...propertyDescriptors } = Object.getOwnPropertyDescriptors(prototype);
+            Object.defineProperties(NewClass.prototype, propertyDescriptors);
             prototype = Object.getPrototypeOf(prototype);
         }
     };
 
-    classes.forEach(singleClass => {
+    for (const singleClass of classes) {
         copyProperties(singleClass.prototype);
         NewClass.prototype.prototypes[singleClass.prototype.constructor.name] = singleClass;
-    });
+    }
 
     return NewClass;
 }
