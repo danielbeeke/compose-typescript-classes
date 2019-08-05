@@ -4,6 +4,9 @@ let user = new User({
   firstName: 'henk'
 });
 
-let info = user.getFieldWidgetInfo('firstName');
-
-console.log(user, info)
+console.log(
+    user,
+    user.getFieldWidgetInfo('firstName'),
+    user.shouldRender('firstName'),
+    user.type()
+);
