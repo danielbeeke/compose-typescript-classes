@@ -9,7 +9,7 @@ export class Fieldable {
         this.isFieldable = true;
     }
 
-    getFieldWidgetInfo (field): FieldWidgetInfo {
+    getFieldWidgetInfo (field) : FieldWidgetInfo {
         return Reflect.getMetadata('field.widget.definition', this, field);
     }
 }
