@@ -1,25 +1,36 @@
 export function Compose(...classes: any): any {
 
-    function NewClass () {}
+    class NewClass {
+        public prototypes: Object;
 
-    let copyPropertiesFromPrototype = (prototype) => {
+        constructor(composedData) {
+            Object.keys(this.prototypes).forEach(className => {
+                let temporaryInstance = new this.prototypes[className](composedData[className]);
+                Object.getOwnPropertyNames(temporaryInstance).forEach(property => {
+                    this[property] = temporaryInstance[property];
+                });
+            });
+        }
+    }
+
+    NewClass.prototype.prototypes = {};
+
+    let copyProperties = (prototype) => {
         while (prototype) {
             Object.getOwnPropertyNames(prototype).forEach(methodName => {
-                if (!NewClass.prototype[methodName]) {
+                if (!NewClass.prototype[methodName] && methodName != 'constructor') {
                     NewClass.prototype[methodName] = prototype[methodName];
                 }
             });
 
-            // Traverse the chain.
-            prototype = prototype.__proto__;
+            prototype = Object.getPrototypeOf(prototype);
         }
     };
 
     classes.forEach(singleClass => {
-        copyPropertiesFromPrototype(singleClass.prototype);
+        copyProperties(singleClass.prototype);
+        NewClass.prototype.prototypes[singleClass.prototype.constructor.name] = singleClass;
     });
-
-    NewClass.prototype.constructor = NewClass;
 
     return NewClass;
 }

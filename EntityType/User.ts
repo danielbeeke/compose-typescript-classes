@@ -10,8 +10,10 @@ export class User extends Compose (Entity, ImprovedFieldable) {
     })
     protected firstName: string;
 
-    constructor (data) {
-        super();
-        Object.assign(this, data);
+    constructor ({ firstName, uid }) {
+        super({
+            Entity: { uid, firstName },
+            ImprovedFieldable: {  }
+        });
     }
 }
