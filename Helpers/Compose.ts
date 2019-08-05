@@ -3,12 +3,10 @@ export function Compose(...classes: any): any {
     class NewClass {
         public prototypes: Object;
 
-        constructor(composedData) {
+        constructor (composedData) {
             Object.keys(this.prototypes).forEach(className => {
-                let temporaryInstance = new this.prototypes[className](composedData[className]);
-                Object.getOwnPropertyNames(temporaryInstance).forEach(property => {
-                    this[property] = temporaryInstance[property];
-                });
+                const parentInstance = new this.prototypes[className](composedData[className]);
+                Object.defineProperties(this, Object.getOwnPropertyDescriptors(parentInstance));
             });
         }
     }
