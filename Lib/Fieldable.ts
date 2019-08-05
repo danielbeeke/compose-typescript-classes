@@ -5,11 +5,11 @@ export class Fieldable {
 
     public isFieldable: boolean;
 
-    constructor (data) {
+    constructor (data: any) {
         this.isFieldable = true;
     }
 
-    getFieldWidgetInfo (field) : FieldWidgetInfo {
+    getFieldWidgetInfo (field: string) : FieldWidgetInfo {
         return Reflect.getMetadata('field.widget.definition', this, field);
     }
 }

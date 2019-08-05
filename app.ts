@@ -1,4 +1,6 @@
+// @ts-ignore
 import { green, bold } from "https://deno.land/std/colors/mod.ts";
+// @ts-ignore
 import { User } from './EntityType/User.ts';
 
 let user = new User({

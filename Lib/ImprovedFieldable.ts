@@ -1,3 +1,4 @@
+// @ts-ignore
 import {Fieldable} from './Fieldable.ts';
 
 export class ImprovedFieldable extends Fieldable {
@@ -10,6 +11,7 @@ export class ImprovedFieldable extends Fieldable {
     }
 
     shouldRender (field): boolean {
+        // @ts-ignore
         let widgetInfo = this.getFieldWidgetInfo(field);
         return !!widgetInfo;
     }

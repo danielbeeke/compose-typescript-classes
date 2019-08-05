@@ -1,4 +1,6 @@
+// @ts-ignore
 import './../Lib/Reflect.ts';
+// @ts-ignore
 import {FieldWidgetInfo} from "../Interfaces/FieldWidgetInfo.ts";
 
 export function FieldWidget(definition: FieldWidgetInfo): Function {
